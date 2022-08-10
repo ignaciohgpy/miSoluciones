@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% block contenido %}
+<div  style="height: 20px" class="jumbotron">
+<div style="margin-left:auto;margin-right: auto;">
+  <h5>Hola ¿en qué te podemos ayudar?</h5>
+  <p>Vas borrar el Libro "{{ libros.titulo }}"</p>
+ </div>
+</div>
+<form method="post">{% csrf_token %}
+¿Estás seguro que deseas borrar la tarea "{{ libros.titulo }}"?
+<input type="submit" value="Aceptar" />
+</form>
+{% endblock %}

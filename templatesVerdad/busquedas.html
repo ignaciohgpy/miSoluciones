@@ -1,0 +1,457 @@
+
+
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+<body>
+	
+<style>
+    .header {
+  background: url('{% static 'images/img04441.jpg' %}') ;
+  background-size:  contain;
+  min-height: 20vh;
+}
+ #menu .current_page_item a {
+	height: 26px;
+	background: url('{% static 'images/img02.jpg' %}') repeat-x left top;
+	color: #343738;
+}
+</style>
+<style>
+    body {
+    background:#eee;
+    margin:0;
+    padding:0;
+}
+.example {
+    background:#fff url(../images/clouds-in-blue-sky.jpg);
+    width:770px;
+    height:570px;
+    border:1px #000 solid;
+    margin:20px auto;
+    padding:15px;
+    border-radius:0px;
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+}
+
+
+/* main menu styles */
+#nav {
+    display:inline-block;
+    width:100%;
+    margin:0px auto;
+    padding:0;
+    background: rgba(0, 0, 0, 0.36) url(../images/bg.png) repeat-x 0 -110px;
+
+    border-radius:0px; /*some css3*/
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -moz-box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .5);
+}
+#nav li {
+    margin:10px;
+    float:left;
+    position:relative;
+    list-style:none;
+}
+#nav a {
+    font-weight:bold;
+    color:#e7e5e5;
+    text-decoration:none;
+    display:block;
+    padding:8px 20px;
+
+    border-radius:10px; /*some css3*/
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    text-shadow:0 2px 2px rgba(0,0,0, .7);
+}
+
+/* selected menu element */
+#nav .current a, #nav li:hover > a {
+    background:#7788aa url(../images/bg.png) repeat-x 0 -20px;
+    color:#000;
+    border-top:1px solid #f8f8f8;
+
+    box-shadow:0 2px 2px rgba(0,0,0, .7); /*some css3*/
+    -moz-box-shadow:0 2px 2px rgba(0,0,0, .7);
+    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .7);
+    text-shadow:0 2px 2px rgba(255,255,255, 0.7);
+}
+
+/* sublevels */
+#nav ul li:hover a, #nav li:hover li a {
+    background:none;
+    border:none;
+    color:#000;
+
+}
+ul{ z-index: 999; }
+#nav ul li a:hover {
+    background:#335599 url(../images/bg.png) repeat-x 0 -100px;
+    color:#fff;
+
+    border-radius:10px; /*some css3*/
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    text-shadow:0 2px 2px rgba(0,0,0, 0.7);
+}
+
+#nav ul li:first-child > a {
+    -moz-border-radius-topleft:10px; /*some css3*/
+    -moz-border-radius-topright:10px;
+    -webkit-border-top-left-radius:10px;
+    -webkit-border-top-right-radius:10px;
+}
+#nav ul li:last-child > a {
+    -moz-border-radius-bottomleft:10px; /*some css3*/
+    -moz-border-radius-bottomright:10px;
+    -webkit-border-bottom-left-radius:10px;
+    -webkit-border-bottom-right-radius:10px;
+}
+
+/* drop down */
+#nav li:hover > ul {
+    opacity:1;
+    visibility:visible;
+}
+#nav ul {
+    opacity:0;
+    visibility:hidden;
+    padding:0;
+    width:175px;
+    position:absolute;
+    background:#aabbcc url(../images/bg.png) repeat-x 0 0;
+    border:1px solid #7788aa;
+
+    border-radius:10px; /*some css3*/
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -moz-box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .5);
+
+    -moz-transition:opacity .25s linear, visibility .1s linear .1s;
+    -webkit-transition:opacity .25s linear, visibility .1s linear .1s;
+    -o-transition:opacity .25s linear, visibility .1s linear .1s;
+    transition:opacity .25s linear, visibility .1s linear .1s;
+}
+#nav ul li {
+    float:none;
+    margin:0;
+}
+#nav ul a {
+    font-weight:normal;
+    text-shadow:0 2px 2px rgba(255,255,255, 0.7);
+}
+#nav ul ul {
+    left:160px;
+    top:0px;
+}
+
+</style>
+<div id="wrapper">
+	<div class="header">
+
+	</div>
+	<hr />
+
+	<div><!-- end #logo -->
+<div>
+    <ul id="nav">
+        <li class="current"><a href="{% url 'index' %}">Inicio</a></li>
+        {% if request.user.is_staff %}
+        <li><a href="">Acciones</a>
+            <ul>
+
+                <li ><a style="{{admin}}"   href="{% url 'cargar' %}" >Agregar Problema</a></li>
+                <li><a style="{{admin}}"    href="{% url 'ListaL' %}">Gestionar Libro</a>
+
+            </ul>
+        </li>
+        {%endif%}
+    {% if request.user.is_authenticated %}
+        <li><a  data-toggle="modal" data-target="#myModal"  href="">Gestión de Paquetes</a>
+
+        </li>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+        <li><a href="{% url 'consultar' %}">Consultas</a>
+        <li><a href="">Mis paquetes</a>
+        <ul>
+             {% for i in mispaquetes %}
+                 {% if i.activo %}
+                <li><a href="{% url 'mipkt' i.paqueteMio %}">{{i.paqueteMio}}-Comprado</a></li>
+
+                 {% else %}
+        <li><a href="{% url 'mipkt' i.paqueteMio %}">{{i.paqueteMio}}-Pendiente de Pago</a></li>
+        {% endif %}
+       {% endfor %}
+
+       </ul>
+
+       {% endif %}
+</li>
+
+        <li><a href="{% url 'acerca' %}">Acerca de:</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="">Bienvenido {{request.user.username}}</a></li>
+        <li><a href="{% url 'logout' %}">Salir</a></li>
+        {%else%}
+        <li><a href="{% url 'login' %}">Autentificate</a></li>
+        <li><a href="{% url 'registrarse' %}">Registrate</a></li>
+        {% endif %}
+
+    </ul>
+</div>
+        </div>
+        <hr>
+        <hr>
+ <div class="container">
+		
+	<div class="table-responsive" id="mydatatable-container">
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="screen" />
+		
+		 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+       <link href="{% static 'css/alertify.core.css' %}" rel="stylesheet" type="text/css" media="screen" />
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/datatables.min.js' %}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <link  href="{% static 'css/datatables.min.css' %}" rel="stylesheet" type="text/css">
+		
+        <link href="{% static 'css/alertify.default.css' %}" rel="stylesheet" type="text/css" media="screen" />
+       <br>
+    <table class="records_list table table-striped table-bordered table-hover" id="mydatatable">
+        <thead>
+            <tr>
+                <th>Número del Problema</th>
+                <th>Libro</th>
+                <th>Tema</th>
+                <th>Solucionado por</th>
+               
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Filter..</th>
+                <th>Filter..</th>
+                <th>Filter..</th>
+                <th>Filter..</th>
+                
+            </tr>
+        </tfoot>
+        <tbody>
+			{% for j in data %}
+           <tr>
+                <td>{{j.problemaNumero}}</td>
+                <td>{{j.problemaLibro}}</td>
+                <td>{{j.problemaTema}}</td>
+                <td>{{j.problemaSolucionadoPor}}</td>
+                               
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+<style>
+#mydatatable tfoot input{
+    width: 100% !important;
+}
+#mydatatable tfoot {
+    display: table-header-group !important;
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#mydatatable tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Filtrar.." />' );
+    } );
+
+    var table = $('#mydatatable').DataTable({
+        "dom": 'B<"float-left"i><"float-right"f>t<"float-left"l><"float-right"p><"clearfix">',
+        "responsive": false,
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        },
+        "order": [[ 0, "desc" ]],
+        "initComplete": function () {
+            this.api().columns().every( function () {
+                var that = this;
+
+                $( 'input', this.footer() ).on( 'keyup change', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                            .search( this.value )
+                            .draw();
+                        }
+                });
+            })
+        }
+    });
+});
+</script>
+</div>
+ <div class="modal" id="myModal" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+      <h4 class="modal-title" style="color:red">Configuración de Paquete</h4>
+
+      </div>
+
+<div class="modal-body">
+        <form role="form">
+ <div class="form-group">
+ <label for="Perfil">Selecione su perfil</label>
+ <select  onchange="getPaquetes()" id="Perfil" class="form-control">
+  <option>Elija un Perfil</option>
+  {% for k in perfiles %}
+   <option> {{ k.nombrePerfil }}</option>
+  {% endfor %}
+  </select>
+ <br>
+
+ <label for="Pktes">Selecione un paquete</label>
+ <select  onchange="getDetalles()" id="Pktes" class="form-control">
+
+
+ </select>
+     <br>
+ <label for="name" style="color:red">Detalles del paquete</label>
+ <div id="detalles" class="container">
+<h8 id="codigo" style="font-weight:bold;
+  color:blue;">
+</h8><br>
+<h8 id="cantidad" style="font-weight:bold;
+  color:blue;">
+</h8><br>
+<h8 id="precio" style="font-weight:bold;
+  color:blue;">
+</h8><br>
+<h8 id="descri" style="font-weight:bold;
+  color:blue;">
+</h8><br>
+<h8 id="dias" style="font-weight:bold;
+  color:blue;">
+</h8><br>
+</div>
+
+</div>
+
+
+</form>
+  </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button  onclick="compraPKT()" type="botton" class="btn btn-primary" data-dismiss="modal">Enviar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+    function compraPKT() {
+
+      var tema=$("#Pktes").val();
+      
+       $.ajax({
+        url: '{% url "compraPKT" %}',
+        data: {
+
+          'tema': tema,
+          
+
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data) {
+          if (data.tipo==1) {
+              alertify.error(data.sms);
+            }
+          else {
+			  alertify.error(data.sms);
+			  }
+
+}
+          }
+        })
+      }
+
+
+  </script>
+  <script>
+    function getPaquetes() {
+
+       var perfil = $('#Perfil').val()
+
+       $.ajax({
+        url: '{% url "getPaquetes" %}',
+        data: {
+          'perfil': perfil
+
+        },
+        dataType: 'json',
+        success: function (data) {
+            $("#Pktes").empty();
+            $("#Pktes").append('<option value="">Selecione un Paquete</option>');
+            for(var ii=0;ii<data.paquetes.length;ii++)
+         {
+			$("#Pktes").append('<option value='+data.paquetes[ii]+'>'+data.paquetes[ii]+'</option>');
+
+			 }
+	}
+
+}
+
+
+
+
+          )}
+
+ </script>
+<script>
+    function getDetalles() {
+
+       var paquete=$("#Pktes option:selected").val();
+      
+       
+       $.ajax({
+        url: '{% url "getDetalles" %}',
+        data: {
+          'CodigoP': paquete
+
+        },
+        dataType: 'json',
+        success: function (data) {
+            $('#codigo').text("Código del Paquete: "+data.paquetes[1])
+            $('#cantidad').text("Cantidad de Problemas: "+data.paquetes[2])
+            $('#precio').text("Valor del Paquete "+data.paquetes[3]+ " CUP")
+            $('#dias').text("Válido por "+data.paquetes[4]+" días")
+            $('#descri').text("Descripción "+data.paquetes[5])
+	}
+
+}
+
+
+
+
+          )}
+
+ </script>
+
+
+
+

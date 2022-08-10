@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% block contenido %}
+<div  style="height: 20px" class="jumbotron">
+<div style="margin-left:auto;margin-right: auto;">
+    <br>
+    <p>Listado de Libros o Guías de MisSoluciones</p>
+ </div>
+</div>
+<p>
+
+   <a href="{% url 'CreaLibro' %}">Agregar libro</a>
+
+</p>
+<table class="table table-dark table-hover">
+ <thead>
+      <tr>
+        <th>Titulo del libro</th>
+         <th>Autor</th>
+           <th>Edición</th>
+
+        <th>Borrar</th>
+        <th>Modificar</th>
+
+      </tr>
+    </thead>
+<tbody>
+{% for libro in object_list %}
+    <tr>
+        <td>{{ libro.titulo }}</td>
+        <td>{{ libro.autor }}</td>
+        <td>{{ libro.edicion }}</td>
+
+        <td><button  class="btn btn-warning" onclick=""><a href="{% url 'borralibros' libro.id %}">Borrar</a></button></td>
+        <td><button  class="btn btn-warning" onclick=""><a href="{% url 'librosAct' libro.id %}">Modificar</a></button></td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

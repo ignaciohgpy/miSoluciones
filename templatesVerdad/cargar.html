@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+<div>
+{% block contenido %}
+<form name = "form" enctype="multipart/form-data" method = "POST" action="" enctype="multipart/form-data"> {% csrf_token %}
+      <div class="card">
+
+          <center><h4>Nuevo Problema</h4></center>
+          <hr>
+         <dif class="card-body">
+<table>
+          {{formulario.as_table}}
+</table>
+     <dif class="d-flex justify-content-end">
+     <input type="reset" value="Cancelar" class="btn btn-secondary">
+  &nbsp;
+    <input type="submit" value="Enviar" class="btn btn-primary">
+                 </dif>
+           </dif>
+
+          </div>
+
+ </form>
+ {% endblock contenido %}
+</div>
+
+{% block lateral %}
+
+        {% endblock %}

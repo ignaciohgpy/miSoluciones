@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+
+<div>
+{% block contenido %}
+<form method="POST">{% csrf_token %}
+
+<table></table>
+ {{ form.as_table }}
+</table>
+  <input class="btn btn-primary" value="Enviar" type="submit" name="sumbit">
+</form>
+</div>
+         {% endblock %}

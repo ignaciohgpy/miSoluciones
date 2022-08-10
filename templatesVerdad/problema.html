@@ -1,0 +1,88 @@
+{% extends 'index.html' %}
+
+
+div class="container">
+    {% block contenido %}
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    {% for u in tamara %}
+      {% if forloop.first %}
+    <div class="carousel-item active">
+        <img src="{{u.problemaProblema.url }}" class="d-block w-100" alt="...">
+    </div>
+      {% endif %}
+       <div class="carousel-item">
+        <img src="{{u.problemaProblema.url }}" class="d-block w-100" alt="...">
+    </div>
+   {%endfor%}
+
+
+
+  </div>
+
+</div>
+
+</div>
+
+{% endblock %}
+
+
+
+  <br>
+{% block lateral %}
+  <div  class="card text-white bg-info mb-3" style="width: 240px;">
+   <div class="card-header">Lo que te ofrezco</div>
+  <div class="card-body">
+  <h7>{{ libro }}</h7>
+
+<div id="treeview_container" class="hummingbird-treeview" style="height: 230px; overflow-y: scroll;">
+      <ul id="treeview" class="hummingbird-base">
+      <li data-id="0">
+    <i class="fa fa-plus"></i>
+    <label>
+        <input id="xnode-0" data-id="custom-0" type="checkbox" /> <h7>Temas</h7>
+    </label>
+    <ul>
+      {% for llave, valor in arbol.items %}
+      <li data-id="1">
+      <i class="fa fa-plus"></i>
+      <label>
+          <input  id="xnode-0-1" data-id="custom-0-1" type="checkbox" /> {{  llave }}
+      </label>
+
+      <ul>
+          {% for j  in valor %}
+          <li>
+        <label>
+            <input class="hummingbird-end-node" id="xnode-0-1-1" data-id="custom-0-1-1" type="checkbox" /> <a href="{% url 'versolucion' libro j %}" >{{ j }}</a>
+        </label>
+          </li>
+         {% endfor %}
+      </ul>
+        </li>
+    {% endfor %}
+
+    </ul>
+      </li>
+  </ul>
+    </div>
+ </div>
+</div>
+
+<script>
+$("#treeview").hummingbird();
+$( "#checkAll" ).click(function() {
+  $("#treeview").hummingbird("checkAll");
+});
+$( "#uncheckAll" ).click(function() {
+  $("#treeview").hummingbird("uncheckAll");
+});
+$( "#collapseAll" ).click(function() {
+  $("#treeview").hummingbird("collapseAll");
+});
+$( "#checkNode" ).click(function() {
+  $("#treeview").hummingbird("checkNode",{attr:"id",name: "node-0-2-2",expandParents:false});
+});
+</script>
+
+{% endblock %}

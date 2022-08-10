@@ -1,0 +1,55 @@
+{% load static %}
+<head>
+{% load bootstrap4 %}
+{% bootstrap_css %}
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Mis soluciones</title>
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body style="background-color: rgba(0, 0, 0, 0.13)">
+<div class="container" >
+ <br>
+<div>
+       <button type="button" class="btn btn-primary hBack">Volver</button>
+    </div>
+<br>
+
+
+<div class="row" style="width: 100%;height: 100%" >
+
+  <div class="col-md-8" >
+        <embed src="{{solucion.problemaSolucion.url}}" style="width: 100%;height: 100%"></embed>
+  </div>
+
+<div class="col-md-4">
+
+  <img src="{{solucion.problemaProblema.url}}" >
+    <br>
+    <br>
+    <hr size="8px" color="black" />
+
+  <div class="row">
+
+      <audio id="medio" controls>Escuchar
+        <source src="{{solucion.problemaVideo.url}}">
+</audio>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+<script>$(".hBack").on("click", function(e){
+    e.preventDefault();
+    window.history.back();
+});</script>
+</body>
+
+
+
+

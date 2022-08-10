@@ -1,0 +1,119 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block contenido %}
+<div  style="height: 20px" class="jumbotron">
+<div style="margin-left:auto;margin-right: auto;">
+  <br>
+  <p>Paquetes disponibles de {{perfil}}</p>
+ </div>
+</div>
+   <div class="container">
+  <h2>Paquetes disponibles de {{perfil}}</h2>
+
+  <table class="table table-dark table-hover">
+    <thead>
+      <tr>
+        <th>Codigo del Paquete</th>
+        <th>Problemas resueltos</th>
+        <th>Precio</th>
+        <th>Dias Activo</th>
+        <th>Descripción</th>
+        {% if request.user.is_authenticated%}
+        <th>Adquirir</th>
+        {%endif%}
+        <th>Ver</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for u in paquetes %}
+      <tr>
+        <td>{{ u.paqueteCod }}</td>
+        <td>{{u.paqueteCant  }}</td>
+        <td>{{u.paquetePrecio  }}</td>
+        <th>{{u.paqueteDias }}</th>
+        <td>{{ u.paqueteDescr}}</td>
+        {% if request.user.is_authenticated %}
+        <td><button value={{u.paquetePrecio}} id={{u.paqueteCod}} name={{u.paquetePrecio}} class="btn btn-warning" onclick="agregarCarro(this)" >Adquirir</button></td>
+        {%endif%}
+        <td><a   class="btn btn-success " href="{% url 'verPaquetes' u.paqueteCod %}" >Ver</a></td>
+      </tr>
+    {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+<script>
+    function compraPKT(b) {
+
+      var codigo=b.id;
+
+       $.ajax({
+        url: '{% url "compraPKT" %}',
+        data: {
+
+          'codigo': codigo,
+
+
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data) {
+          if (data.tipo==1) {
+              alertify.error(data.sms);
+            }
+          else {
+			  alertify.error(data.sms);
+			  }
+
+}
+          }
+        })
+      }
+
+
+  </script>
+<script>
+   function agregarCarro(u){
+      var codigo=u.id;
+      var precio=u.value;
+      var total=parseInt($("#total").text());
+      var precioTotal=total+parseInt(precio)
+      $("#total").remove();
+      $("#carrito").append('<div id='+codigo+' class="media"><img class="d-flex mr-3" src="{% static 'img/logo/paquetes.png' %}" width="60"><div class="media-body"> <h5><a href="javascript:void(0)">'+codigo+'</a></h5><p  class="price"> <span id="dimeprecio" >'+ precio+'&nbsp</span> </p><span onclick="borrarCarro('+codigo+')" class="fa fa-trash" aria-hidden="true"></span></span></div></div>');
+      $("#totalcarrito").append('<span id="total" class="text-primary"><strong>'+precioTotal+'</strong></span>')
+      var divs = document.getElementsByClassName("media").length;
+      cantidacompra=parseInt(divs)-1
+      $("#cantidadCarro").text(cantidacompra);
+      alertify.success("Paquete adicionado al carro");
+
+
+
+
+
+
+
+      }
+ </script>
+<script>
+   function borrarCarro(a){
+      var codigo=a.id;
+      var total=$("#total").text()
+      var borrado=$("#dimeprecio").text()
+      var resto=parseInt(total)-parseInt(borrado)
+      $("#"+codigo).remove();
+      $("#total").remove()
+      var cantidad=$("#cantidadCarro").text();
+      cantidad=parseInt(cantidad)-1
+      $("#cantidadCarro").text(cantidad);
+      $("#totalcarrito").append('<span id="total" class="text-primary"><strong>'+resto+'</strong></span>')
+
+
+
+
+
+
+
+
+      }
+ </script>
+{% endblock %}

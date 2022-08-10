@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+
+{% block contenido %}
+{% if salvado %}
+ <strong>Your profile was saved. </strong>
+ {% endif %}
+ {% if not salvado %}
+ <strong>Your profile was not saved. </strong>
+ {% endif %}
+
+{% endblock contenido %}

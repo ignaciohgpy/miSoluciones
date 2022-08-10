@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+{% load bootstrap4 %}
+{% bootstrap_css %}
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Biblioteca de Soluciones</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="{% static 'ccstabla/css/bootstrap.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'ccstabla/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/owl.carousel.css' %}" rel="stylesheet" type="text/css"  />
+     <link href="{% static 'ccstabla/css/owl.theme.css' %}" rel="stylesheet" type="text/css"  />
+     <link href="{% static 'ccstabla/css/owl.transitions.css' %}" rel="stylesheet" type="text/css"  />
+     <link href="{% static 'ccstabla/css/animate.css' %}" rel="stylesheet" type="text/css"  />
+     <link href="{% static 'ccstabla/css/normalize.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/meanmenu.min.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/main.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/educate-custon-icon.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/morrisjs/morris.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/scrollbar/jquery.mCustomScrollbar.min.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/metisMenu/metisMenu.min.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/metisMenu/metisMenu-vertical.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/calendar/fullcalendar.min.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/calendar/fullcalendar.print.min.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/editor/select2.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/editor/datetimepicker.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/editor/bootstrap-editable.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/editor/x-editor-style.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/data-table/bootstrap-table.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/data-table/bootstrap-editable.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/style.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/responsive.css' %}" rel="stylesheet" type="text/css"  />
+   <link href="{% static 'ccstabla/js/vendor/modernizr-2.8.3.min.js' %}" rel="stylesheet"  />
+</head>
+
+ <body>
+
+
+ <div class="data-table-area mg-b-15">
+
+<table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true"
+                                        data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+        <thead>
+            <tr>
+                <th data-field="numero" data-editable="true">Número</th>
+                <th data-field="libro" data-editable="true">Libro</th>
+                <th data-field="tema" data-editable="true">Tema</th>
+                <th data-field="id" data-editable="true">Solucionado</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in data %}
+
+            <tr>
+                <td >{{ u.problemaNumero }}</td>
+                <td >{{ u.problemaLibro }}</td>
+                <td>{{ u.problemaTema }}</td>
+                <td>{{ u.problemaSolucionadoPor }}</td>
+
+            </tr>
+            {% endfor %}
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Numero</th>
+                <th>Libro</th>
+                <th>Tema</th>
+                <th>Solucionado</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+ <script src="{% static 'ccstabla/js/vendor/jquery-1.12.4.min.js' %}"></script>
+ <script src="{% static 'ccstabla/js/bootstrap.min.js' %}"></script>
+ <script src="{% static 'ccstabla/js/wow.min.js' %}"></script>
+ <script src="{% static 'ccstabla/js/jquery-price-slider.js' %}"></script>
+ <script src="{% static 'ccstabla/js/jquery.meanmenu.js' %}"></script>
+ <script src="{% static 'ccstabla/js/owl.carousel.min.js' %}"></script>
+ <script src="{% static 'ccstabla/js/jquery.sticky.js' %}"></script>
+ <script src="{% static 'ccstabla/js/jquery.scrollUp.min.js' %}"></script>
+ <script src="{% static 'ccstabla/js/scrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+ <script src="{% static 'ccstabla/js/scrollbar/mCustomScrollbar-active.js' %}"></script>
+ <script src="{% static 'ccstabla/js/metisMenu/metisMenu.min.js' %}"></script>
+ <script src="{% static 'ccstabla/js/metisMenu/metisMenu-active.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/bootstrap-table.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/tableExport.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/data-table-active.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/bootstrap-table-editable.js' %}"></script>
+
+ <script src="{% static 'ccstabla/js/data-table/bootstrap-editable.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/bootstrap-table-resizable.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/colResizable-1.5.source.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/bootstrap-table-export.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/jquery.mockjax.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/mock-active.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/select2.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/moment.min.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/bootstrap-datetimepicker.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/bootstrap-editable.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/xediable-active.js' %}"></script>
+ <script src="{% static 'ccstabla/js/chart/jquery.peity.min.js' %}"></script>
+ <script src="{% static 'ccstabla/js/peity/peity-active.js' %}"></script>
+
+
+
+
+
+
+
+
+
+
+ </body>
+</html>
+
+

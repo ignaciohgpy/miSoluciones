@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+{% block contenido %}
+<div  style="height: 20px" class="jumbotron">
+<div style="margin-left:auto;margin-right: auto;">
+     <br>
+  <p>Listado de Temas de problemas resueltos</p>
+ </div>
+</div>
+<p>
+
+   <a href="{% url 'Createmas' %}">Agregar Temas</a>
+
+</p>
+<table class="table table-dark table-hover">
+ <thead>
+      <tr>
+        <th>Nombre del tema</th>
+         <th>Perfil</th>
+
+        <th>Modificar</th>
+        <th>Borrar</th>
+
+
+      </tr>
+    </thead>
+<tbody>
+{% for tema in object_list %}
+    <tr>
+        <td>{{ tema.temaNombre }}</td>
+        <td>{{ tema.perfilId }}</td>
+        <td><button  class="btn btn-warning" onclick=""><a href="{% url 'TematicasAct' tema.id %}">Modificar</a></button></td>
+        <td><button  class="btn btn-warning" onclick=""><a href="{% url 'borraTemas' tema.id %}">Borrar</a></button></td>
+
+
+
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock%}

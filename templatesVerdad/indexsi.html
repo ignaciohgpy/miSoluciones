@@ -1,0 +1,562 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+{% load static %}
+
+<head>
+{% load bootstrap4 %}
+{% bootstrap_css %}
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Mis soluciones</title>
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link href="{% static 'css/alertify.core.css' %}" rel="stylesheet" type="text/css" media="screen" />
+
+<link href="{% static 'css/alertify.default.css' %}" rel="stylesheet" type="text/css" media="screen" />
+<link href="{% static 'css/jquerysctipttop.css' %}" rel="stylesheet" type="text/css">
+<link  href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link  href="{% static 'css/hummingbird-treeview.css' %}" rel="stylesheet" type="text/css">
+<link  href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+<link  href="{% static 'css/datatales.min.css' %}" rel="stylesheet" type="text/css">
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/datatables.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/alertify.js' %}"></script>
+<script src="{% static 'js/jquery-3.5.1.js' %}"></script>
+<script src="{% static 'js/hummingbird-treeview.js' %}"></script>
+</head>
+<body>
+<style>
+    .header {
+  background: url('{% static 'images/img04441.jpg' %}') ;
+  background-size:  contain;
+  min-height: 20vh;
+}
+ #menu .current_page_item a {
+	height: 26px;
+	background: url('{% static 'images/img02.jpg' %}') repeat-x left top;
+	color: #343738;
+}
+</style>
+<style>
+    body {
+    background:#eee;
+    margin:0;
+    padding:0;
+}
+.example {
+    background:#fff url(../images/clouds-in-blue-sky.jpg);
+    width:770px;
+    height:570px;
+    border:1px #000 solid;
+    margin:20px auto;
+    padding:15px;
+    border-radius:0px;
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+}
+
+
+/* main menu styles */
+#nav {
+    display:inline-block;
+    width:100%;
+    margin:0px auto;
+    padding:0;
+    background: rgba(0, 0, 0, 0.36) url(../images/bg.png) repeat-x 0 -110px;
+
+    border-radius:0px; /*some css3*/
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -moz-box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .5);
+}
+#nav li {
+    margin:10px;
+    float:left;
+    position:relative;
+    list-style:none;
+}
+#nav a {
+    font-weight:bold;
+    color:#e7e5e5;
+    text-decoration:none;
+    display:block;
+    padding:8px 20px;
+
+    border-radius:10px; /*some css3*/
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    text-shadow:0 2px 2px rgba(0,0,0, .7);
+}
+
+/* selected menu element */
+#nav .current a, #nav li:hover > a {
+    background:#7788aa url(../images/bg.png) repeat-x 0 -20px;
+    color:#000;
+    border-top:1px solid #f8f8f8;
+
+    box-shadow:0 2px 2px rgba(0,0,0, .7); /*some css3*/
+    -moz-box-shadow:0 2px 2px rgba(0,0,0, .7);
+    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .7);
+    text-shadow:0 2px 2px rgba(255,255,255, 0.7);
+}
+
+/* sublevels */
+#nav ul li:hover a, #nav li:hover li a {
+    background:none;
+    border:none;
+    color:#000;
+
+}
+ul{ z-index: 999; }
+#nav ul li a:hover {
+    background:#335599 url(../images/bg.png) repeat-x 0 -100px;
+    color:#fff;
+
+    border-radius:10px; /*some css3*/
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    text-shadow:0 2px 2px rgba(0,0,0, 0.7);
+}
+
+#nav ul li:first-child > a {
+    -moz-border-radius-topleft:10px; /*some css3*/
+    -moz-border-radius-topright:10px;
+    -webkit-border-top-left-radius:10px;
+    -webkit-border-top-right-radius:10px;
+}
+#nav ul li:last-child > a {
+    -moz-border-radius-bottomleft:10px; /*some css3*/
+    -moz-border-radius-bottomright:10px;
+    -webkit-border-bottom-left-radius:10px;
+    -webkit-border-bottom-right-radius:10px;
+}
+
+/* drop down */
+#nav li:hover > ul {
+    opacity:1;
+    visibility:visible;
+}
+#nav ul {
+    opacity:0;
+    visibility:hidden;
+    padding:0;
+    width:175px;
+    position:absolute;
+    background:#aabbcc url(../images/bg.png) repeat-x 0 0;
+    border:1px solid #7788aa;
+
+    border-radius:10px; /*some css3*/
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -moz-box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .5);
+
+    -moz-transition:opacity .25s linear, visibility .1s linear .1s;
+    -webkit-transition:opacity .25s linear, visibility .1s linear .1s;
+    -o-transition:opacity .25s linear, visibility .1s linear .1s;
+    transition:opacity .25s linear, visibility .1s linear .1s;
+}
+#nav ul li {
+    float:none;
+    margin:0;
+}
+#nav ul a {
+    font-weight:normal;
+    text-shadow:0 2px 2px rgba(255,255,255, 0.7);
+}
+#nav ul ul {
+    left:160px;
+    top:0px;
+}
+</style>
+<div id="wrapper">
+	<div class="header">
+
+	</div>
+	<hr />
+{% block menu %}
+	<div><!-- end #logo -->
+<div>
+    <ul id="nav">
+        <li class="current"><a href="{% url 'index' %}">Inicio</a></li>
+        {% if request.user.is_staff %}
+        <li><a href="">Acciones</a>
+            <ul>
+
+                <li ><a style="{{admin}}"   href="{% url 'cargar' %}" >Agregar Problema</a></li>
+                <li><a style="{{admin}}"    href="{% url 'ListaL' %}">Gestionar Libro</a>
+
+            </ul>
+        </li>
+        {%endif%}
+    {% if request.user.is_authenticated %}
+        <li><a  data-toggle="modal" data-target="#myModal"  href="">Gestión de Paquetes</a>
+
+        </li>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+        <li><a href="{% url 'consultar' %}">Consultas</a>
+        <li><a href="">Mis paquetes</a>
+        <ul>
+             {% for i in mispaquetes %}
+                 {% if i.activo %}
+                <li><a href="{% url 'mipkt' i.paqueteMio %}">{{i.paqueteMio}}-Comprado</a></li>
+
+                 {% else %}
+        <li><a href="{% url 'mipkt' i.paqueteMio %}">{{i.paqueteMio}}-Pendiente de Pago</a></li>
+        {% endif %}
+       {% endfor %}
+
+       </ul>
+
+       {% endif %}
+</li>
+
+        <li><a href="{% url 'acerca' %}">Acerca de:</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="">Bienvenido {{request.user.username}}</a></li>
+        <li><a href="{% url 'logout' %}">Salir</a></li>
+        {%else%}
+        <li><a href="{% url 'login' %}">Autentificate</a></li>
+        <li><a href="{% url 'registrarse' %}">Registrate</a></li>
+        {% endif %}
+
+    </ul>
+</div>
+        </div>
+{% endblock  %}
+	<!-- end #header -->
+	<!-- end #header-wrapper -->
+	<div id="page">
+	<div id="page-bgtop">
+		<div id="content">
+            {% block contenido %}
+			<div class="post">
+				<h2 class="title"><a href="#">Bienvenido a Mis soluciones</a></h2>
+				<div class="entry">
+			    <p>Gracias por visitar este sitio, la intención del mismo es ayudar a los estudiantes de ingeniería en distintas disciplinas, sobre todo en las que traen varias dificultades.</p>
+			    <p>Podrán ver soluciones y escuchar explicaciones sobre muchos problemas, trataré de utilizar un lenguaje simple, explicando cada detalle oculto en el mismo, y que regularmente pasamos por alto cuando nos disponemos a resolver estos. </p>
+                <p>No necesariamente serán Mis soluciones, podrás brindar las tuyas, que si son diferentes a las existentes y certificadas por algún especialista, serán publicadas. </p>
+
+                </div>
+			</div>
+
+			</div>
+			{% endblock contenido %}
+		<!-- end #content -->
+<style>
+.text {
+  font-size:16px;
+  font-family:helvetica;
+  font-weight:bold;
+  color:#FFFF00;
+  
+}
+.parpadea {
+  
+  animation-name: parpadeo;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  -webkit-animation-name:parpadeo;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes parpadeo{  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes parpadeo {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+   100% { opacity: 1.0; }
+}
+
+@keyframes parpadeo {  
+  0% { opacity: 1.0; }
+   50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+</style>  {% block lateral %}
+
+<div  class="card text-white bg-info mb-3" style="width: 240px;">
+  <div class="card-header"><b><h5 style="font-weight:bold;
+  color:#FFFFCC;">Aclara tus dudas:</h5> </b></div>
+  <div class="card-body">
+       <p class="card-text"><b> Te ofrecemos {{total}} problemas resueltos de los libros siguientes:</b></p>
+      <ul>
+                        {% for j,g in libros.items %}
+						<li style="{{admin}}"><a style="font-weight:bold;
+  color:#FFFFCC;" href="{% url 'problema' j %}" >{{j}} ({{g}})</a></li>
+                        {% endfor %}
+
+					</ul>
+				</li>
+                <a class="parpadea text" href="{% url 'ejemplo' %}">Ejemplos de problemas</a>
+			</ul>
+  </div>
+</div>
+        {% endblock %}
+</div>
+
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+
+	</div>
+
+{%block pie %}
+	<div id="footer-bgcontent">
+
+	<div id="footer">
+		<p>Copyright  2021 Mis Soluciones.cu All rights reserved. Diseñado por: Ignacio Hernandez.</p>
+	</div>
+	</div>
+{% endblock pie%}
+</div>
+
+<div class="modal" id="myModal" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+      <h4 class="modal-title" style="color:red">Configuración de Paquete</h4>
+
+      </div>
+
+      <!-- Modal body -->
+<div class="modal-body">
+        <form role="form">
+ <div class="form-group">
+ <label for="Perfil">Selecione su perfil</label>
+ <select  onchange="getPaquetes()" id="Perfil" class="form-control">
+  <option>Elija un Perfil</option>
+  {% for k in perfiles %}
+   <option> {{ k.nombrePerfil }}</option>
+  {% endfor %}
+  </select>
+ <br>
+
+ <label for="Pktes">Selecione un paquete</label>
+ <select  onchange="getDetalles()" id="Pktes" class="form-control">
+
+
+ </select>
+     <br>
+ <label for="name" style="color:red">Detalles del paquete</label>
+ <div id="detalles" class="container">
+<h8 id="codigo" style="font-weight:bold;
+  color:blue;">
+</h8><br>
+<h8 id="cantidad" style="font-weight:bold;
+  color:blue;">
+</h8><br>
+<h8 id="precio" style="font-weight:bold;
+  color:blue;">
+</h8><br>
+<h8 id="descri" style="font-weight:bold;
+  color:blue;">
+</h8><br>
+<h8 id="dias" style="font-weight:bold;
+  color:blue;">
+</h8><br>
+</div>
+
+</div>
+
+
+</form>
+  </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button  onclick="compraPKT()" type="botton" class="btn btn-primary" data-dismiss="modal">Enviar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+
+ function codigoPKT(objeto) {
+       var codigoPKT=objeto.id;
+       $(".modal-body").attr("id",codigoPKT);
+      
+     }
+
+
+</script>
+
+<script>
+    function notificacion(){
+
+				alertify.alert("<b>Blog Reaccion Estudio</b> probando Alertify");
+			}
+
+</script>
+
+<script>
+    function compraPKT() {
+
+      var tema=$("#Pktes").val();
+      
+       $.ajax({
+        url: '{% url "compraPKT" %}',
+        data: {
+
+          'tema': tema,
+          
+
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data) {
+          if (data.tipo==1) {
+              alertify.error(data.sms);
+            }
+          else {
+			  alertify.error(data.sms);
+			  }
+
+}
+          }
+        })
+      }
+
+
+  </script>
+<script>
+    function getProblemas() {
+	   var body = document.getElementById("divtable");	
+       var tabla = document.createElement("table");
+       var tblBody = document.createElement("tbody");
+       var problemas = ($("#Pktes").find('option:selected').attr('id'));
+       $("#divtable").html("");
+       
+
+       $.ajax({
+        url: '{% url "getProblemas" %}',
+        data: {
+          'problemas': problemas
+
+        },
+        dataType: 'json',
+        success: function (data) {
+		var h=JSON.parse(data.problemas);
+		 for(var i=0;i<h.length;i++){
+			 var fila = document.createElement("tr");
+         for(var ii=0;ii<h[i].length;ii++)
+         {
+			 var celda = document.createElement("td");
+             var textoCelda = document.createTextNode(h[i][ii]);
+             celda.appendChild(textoCelda);
+             fila.appendChild(celda);
+
+			 }
+			 tblBody.appendChild(fila);
+			 
+			 }
+			 tabla.appendChild(tblBody);
+			 tabla.setAttribute('class', 'table table-dark table-striped')
+			 body.appendChild(tabla);
+	}  
+ 
+}
+        
+
+
+
+          )}
+        
+ </script>
+<script>
+    function getPaquetes() {
+
+       var perfil = $('#Perfil').val()
+
+       $.ajax({
+        url: '{% url "getPaquetes" %}',
+        data: {
+          'perfil': perfil
+
+        },
+        dataType: 'json',
+        success: function (data) {
+            $("#Pktes").empty();
+            $("#Pktes").append('<option value="">Selecione un Paquete</option>');
+            for(var ii=0;ii<data.paquetes.length;ii++)
+         {
+			$("#Pktes").append('<option value='+data.paquetes[ii]+'>'+data.paquetes[ii]+'</option>');
+
+			 }
+	}
+
+}
+
+
+
+
+          )}
+
+ </script>
+<script>
+    function getDetalles() {
+
+       var paquete=$("#Pktes option:selected").val();
+      
+       
+       $.ajax({
+        url: '{% url "getDetalles" %}',
+        data: {
+          'CodigoP': paquete
+
+        },
+        dataType: 'json',
+        success: function (data) {
+            $('#codigo').text("Código del Paquete: "+data.paquetes[1])
+            $('#cantidad').text("Cantidad de Problemas: "+data.paquetes[2])
+            $('#precio').text("Valor del Paquete "+data.paquetes[3]+ " CUP")
+            $('#dias').text("Válido por "+data.paquetes[4]+" días")
+            $('#descri').text("Descripción "+data.paquetes[5])
+	}
+
+}
+
+
+
+
+          )}
+
+ </script>
+<script>
+
+ function codigoPKT1(objeto) {
+       var codigoPKT=objeto.id;
+       alert(codigoPKT)
+
+     }
+
+
+</script>
+
+{% bootstrap_javascript jquery='full' %}
+</body>
+ <script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover();
+});
+</script>
+
+</html>

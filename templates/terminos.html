@@ -1,0 +1,72 @@
+{% extends "index.html" %}
+
+{% block contenido %}
+<div  style="height: 20px" class="jumbotron">
+<div style="margin-left:auto;margin-right: auto;">
+  <h5>Términos y condiciones de uso del sitio Web</h5>
+
+ </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="text-align:justif" class="well well-sm">
+<br>
+<p align = "justify" >El usuario del sitio Web (missoluciones.pythonanywhere.com) se compromete a leer detenidamente los términos y condiciones generales, antes de utilizar los portales y servicios Web que se le ofrece . Ello implica que usted acepta expresamente los términos y condiciones generales. En caso de no aceptarlos, se le solicita que no haga uso, ni acceda, ni manipule la información de los servicios ofrecidos por el sitio Web, ya que usted (usuario) está haciendo un uso inadecuado de éste.
+El propósito del sitio Web es la preparación académica de estudiantes y docentes, mediante soluciones a problemas de cursos académicos, Guías de estudios, o textos seleccionados.
+Para sugerencias y/o comentarios sobre los términos y condiciones de uso de nuestro sitio Web pueden notificarnos mediante la sección contáctanos.
+</p>
+<p align = "justify" >Todos los derechos de propiedad intelectual de la página Web son de propiedad de los administradores del sitio. Se prohíbe el uso de cualquier derecho de propiedad intelectual sin contar con el consentimiento previo, expreso y por escrito de aquellos.
+</p>
+
+<p align = "justify" >
+El sitio Web esta disponibles para que el usuario bajo su responsabilidad lo utilice adecuadamente sin aprovecharse de alguna falla que ocurra y saque provecho de la misma. Si encuentra alguna falla en nuestro sitio Web reportarla a misoluciones22@yandex.com
+Los cambios y actualizaciones en los términos y condiciones de uso serán comunicados en nuestro sitio Web oportunamente para que todos los usuarios se informen de los términos y condiciones de uso vigente. Está bajo la responsabilidad del usuario enterarse de los nuevos cambios y restringirse a cumplir como normativa del sitio Web.
+Se prohíbe igualmente el despliegue, exhibición o reproducción del Sitio o de cualquiera de sus subdirectorios o páginas secundarias, en sitios o portales no controlados por la la directiva del sitio.
+    </p><p align = "justify" >   Obligaciones de los usuarios registrados </p>
+                <ul>
+                    <li>El acceso a los servicios a través del Código de Usuario y Contraseña entregados es de su plena y exclusiva responsabilidad, así como por el uso de los mismos.</li>
+                <li>El uso diligente del Código de Usuario y Contraseña entregados, mantener y preservar la confidencialidad de los mismos.</li>
+                    <li>Notificar inmediatamente al área de Contactanos de cualquier uso no autorizado del Código de Usuario y Contraseña o cualquier otra infracción a la seguridad de la misma no siendo el área de sistemas en ningún caso responsable de las acciones realizados por la cuenta del usuario. </li>
+<li>No usar el Código de Usuario y Contraseña para ningún propósito ilegal. </li>
+                    <li>El usuario se compromete a suministrar información verdadera y exacta acerca de él mismo en los formularios de registro del portal. </li>
+                </ul>
+                <p align = "justify" >
+                Los responsables del sitio realizan los mayores esfuerzos para brindar soluciones correctas y exactas del repositorio de soluciones. Sin perjuicio de lo anterior, en algunas oportunidades puede incurrir en errores o en omisiones. En tales hipótesis los responsables no serán responsable del daño, perjuicio directo, indirecto, incidental, consecuente o especial que se derive del uso de la información contenida en este sitio.
+            </p>
+                <p align = "justify" >
+                Los visitantes son enteramente responsables de verificar y evaluar la exactitud, integridad y la utilidad de cualquier información que se encuentre disponible desde esta página Web.
+            </p>
+                 <p align = "justify" >
+                Los responsables no garantiza un servicio libre e interrumpido de esta página pero sí declara su voluntad de efectuar los esfuerzos que, dentro de lo razonables, permitan alcanzar su disponibilidad por el mayor tiempo posible.
+            </p>
+            </div>
+
+        </div>
+        <hr width=1000><br>
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input id="acuerdo" onclick="acuerdo()" type="checkbox" class="form-check-input" value="false">De acuerdo con los Términos
+  </label>
+
+</div>
+        <div>
+    <button id="ok" onclick="ok()" disabled=true type="button" class="btn btn-outline-primary">Aceptar</button>
+    </div>
+</div>
+<script>
+   function acuerdo(){
+        if($("#acuerdo").is(":checked")==true){
+        $("#ok").prop('disabled',false)
+        }
+        else{ $("#ok").prop('disabled',true)}
+        }
+
+</script>
+    <script>
+   function ok(){
+       alertify.success('Su decisión ha sido registrada')
+}
+</script>
+
+{% endblock %}

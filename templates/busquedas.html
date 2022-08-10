@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+{% load static %}
+{% block contenido %}
+ <body>
+ <!div  style="height: 20px" class="jumbotron">
+     <div  style="height: 20px" class="jumbotron">
+<div style="margin-left:auto;margin-right: auto;">
+    <br>
+  <h5>Bienvenido al repositorio de Soluciones</h5>
+
+ </div>
+</div>
+ <div class="data-table-area mg-b-15">
+
+<table id="table" data-toggle="table"  data-search="true" data-show-columns="true"                                         >
+        <thead>
+            <tr>
+                <th data-field="numero" data-editable="true">Número</th>
+                <th data-field="libro" data-editable="true">Libro</th>
+                <th data-field="tema" data-editable="true">Tema</th>
+                <th data-field="id" data-editable="true">Solucionado</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in data %}
+
+            <tr>
+                <td >{{ u.problemaNumero }}</td>
+                <td >{{ u.problemaLibro }}</td>
+                <td>{{ u.problemaTema }}</td>
+                <td>{{ u.problemaSolucionadoPor }}</td>
+
+            </tr>
+            {% endfor %}
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Número</th>
+                <th>Libro</th>
+                <th>Tema</th>
+                <th>Solucionado</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+ </body>
+</html>
+ {% endblock %}
+
+

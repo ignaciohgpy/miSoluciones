@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+
+<div class="container">
+    {% block contenido %}
+  <div id="Mostrar" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    {% for u in solucion %}
+      {% if forloop.first %}
+    <div class="carousel-item active">
+        <a href=""><img src="{{u.problemaProblema.url }}" class="d-block w-100" alt="..."></a>
+    </div>
+      {% endif %}
+       <div class="carousel-item">
+        <a href="{% url "versolucion" u.problemaLibro u.problemaNumero %}"><img src="{{u.problemaProblema.url }}" class="d-block w-100" alt="..."></a>
+    </div>
+   {%endfor%}
+  </div>
+
+</div>
+
+</div>
+
+{% endblock %}
+
+
+
+  <br>
+{% block lateral %}
+  <div  class="card text-white bg-info mb-3" style="width: 240px;">
+  <div class="card-header">Indicaciones</div>
+  <div class="card-body">
+    <b><h7 class="card-title">Indicaciones para el servicio:</h7></b>
+    <p class="card-text">* A su derecha 10 problemas de los que estan solucionados en "Mis Soluciones".</p>
+    <p class="card-text">* Si da click sobre algunos podrás ver la solución propuesta y escuchar la explicación.</p>
+    <p class="card-text">* Para acceder a todos los servicios debes estar autentificado y adquirir unos de los paquetes que se ofertan.</p>
+  </div>
+</div>
+
+
+
+{% endblock lateral %}

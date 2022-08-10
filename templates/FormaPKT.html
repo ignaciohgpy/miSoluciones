@@ -1,0 +1,276 @@
+{% extends "index.html" %}
+
+{% block contenido %}
+    <br>
+<div  style="height: 20px" class="jumbotron">
+<div style="margin-left:auto;margin-right: auto;">
+  <h5>Bienvenido a la Gestión de Paquetes</h5>
+  <p>El siguiente módulo está reservado solo para el grupo de desarrollo del sitio</p>
+ </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="well well-sm">
+
+                <div class="col-xs-4">
+        <label for="paquetes">Paquetes disponibles:</label>
+        <select class="form-control" id="paquetes" onchange="BuscaT()">
+        {% for i in paquetes %}
+        <option>{{i.paqueteCod}}</option>
+        {% endfor %}
+        </select>
+<br>
+    <button type="button" onclick="creaCodigo()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Crear Paquete</button>
+    <button type="button" onclick="borrarPaquetes()" class="btn btn-primary">Borrar Paquete</button>
+
+    <div class="col-xs-4">
+        <label for="libros">Selecione un Libro:</label>
+        <select class="form-control" id="libros" onchange="BuscaT()">
+            <option></option>
+        {% for i in libros %}
+        <option>{{i.titulo}}</option>
+        {% endfor %}
+        </select>
+    <label for="temas">Selecione un Tema :</label>
+    <select multiple class="form-control" id="temas" onclick="BuscaP()">
+
+           </select>
+
+    <label for="temas">Seleccione los Problemas que formararán parte del paquete:</label>
+    <select multiple class="form-control" id="problemas">
+           </select>
+<br>
+    <button type="button"   onclick="muestraproblemas()" data-toggle="modal" data-target="#myModalyy"  class="btn btn-primary">Vista Previa</button>
+    <button type="button" onclick="poblarPaquetes()" class="btn btn-primary">Insertar Problemas</button>
+ </div>
+<div id="myModalyy" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+<div id="demo1" class="landing-categories owl-carousel"  data-ride="carousel">
+
+
+  <!-- The slideshow -->
+
+
+  <!-- Left and right controls -->
+
+
+</div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+
+            </div>
+ <div class="col-xs-4">
+ <div id="figuras" >
+ </div>
+ </div>
+</div>
+   </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ formularioPaquetes.as_ul }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+ function BuscaT(){
+     var libro=$("#libros option:selected").val();
+       $.ajax({
+        url: '{% url "BuscaTemasxLibros" %}',
+        data: {
+          'libro': libro
+
+        },
+        dataType: 'json',
+        success: function (data) {
+            $("#temas").empty()
+          for(var ii=0;ii<data.temas.length;ii++){
+              $("#temas").append('<option value='+data.temas[ii]+'>'+data.temas[ii]+'</option>');
+          }
+	}
+
+}
+          )}
+
+
+ </script>
+
+
+<script>
+ function BuscaP(){
+     var libro=$("#libros option:selected").val();
+     var temas=$("#temas option:selected").text();
+
+
+       $.ajax({
+        url: '{% url "BuscaProblemas" %}',
+        data: {
+          'libro': libro,
+          'temas': temas
+        },
+        dataType: 'json',
+        success: function (data) {
+
+          for(var ii=0;ii<data.problemas.length;ii++){
+              $("#problemas").append('<option value='+data.problemas[ii]+'>'+data.problemas[ii]+'</option>');
+          }
+	}
+
+}
+          )}
+ </script>
+    <script>
+ function muestraproblemas(){
+
+     var text = $("#problemas").val() || [];
+
+       $.ajax({
+        url: '{% url "Muestraproblemas" %}',
+        data: {
+          'problemas': text
+
+        },
+        dataType: 'json',
+        success: function (data) {
+
+
+
+
+          $('#demo1').empty()
+          for(var ii=0;ii<data.temas.length;ii++){
+            var img = document.createElement('img');
+            img.src = data.temas[ii];
+            var node1 = document.createElement("div");
+            node1.setAttribute("class","item");
+            var node2 = document.createElement("div");
+            node2.setAttribute("class","card rounded-0 border-0 text-center");
+            node2.appendChild(img);
+            node1.appendChild(node2);
+
+            $('#demo1').append(node1)
+          }
+	}
+
+}
+          )}
+
+
+ </script>
+     <script>
+ function creaCodigo(){
+
+
+
+       $.ajax({
+        url: '{% url "Creacodigo" %}',
+        data: {
+
+
+        },
+        dataType: 'json',
+        success: function (data) {
+                $("#id_paqueteCod").val(data.codigo)
+
+
+	}
+
+}
+          )}
+
+
+ </script>
+<script>
+function poblarPaquetes(){
+        var problemas=$("#problemas").val() || [];
+        var paquete=$("#paquetes").val() ;
+
+       $.ajax({
+        url: '{% url "poblarPaquetes" %}',
+        data: {
+            'problemas':problemas,
+            'paquete':paquete,
+
+        },
+        dataType: 'json',
+        success: function (data) {
+               alert(data.t)
+
+
+	}
+
+}
+          )}
+ </script>
+ <script>
+    function borrarPaquetes(){
+
+        var paquete=$("#paquetes").val() ;
+
+       $.ajax({
+        url: '{% url "borrarPaquetes" %}',
+        data: {
+
+            'paquete':paquete,
+
+        },
+        dataType: 'json',
+        success: function (data) {
+               $("#paquetes").empty()
+               for(var ii=0;ii<data.listapaquetes.length;ii++){
+              $("#paquetes").append('<option value='+data.listapaquetes[ii]+'>'+data.listapaquetes[ii]+'</option>');
+          }
+
+
+	}
+
+}
+          )}
+ </script>
+{% endblock %}

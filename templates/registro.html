@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+	{% load static %}
+<html lang="en">
+ <head>
+{% load bootstrap4 %}
+{% bootstrap_css %}
+<title>Soluciones | Estudio Online</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'descarga/ccs.css' %}" rel="stylesheet" type="text/css"  />
+        <link href="{% static 'descarga/fuente.css' %}" rel="stylesheet" type="text/css"  />
+        <link href="{% static 'fonts/sb-bistro/sb-bistro.css' %}" rel="stylesheet" type="text/css"  />
+        <link href="{% static 'fonts/font-awesome/font-awesome.css' %}" rel="stylesheet" type="text/css"  />
+
+        <link href="{% static 'packages/bootstrap/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'packages/o2system-ui/o2system-ui.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'packages/owl-carousel/owl-carousel.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'packages/cloudzoom/cloudzoom.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'packages/thumbelina/thumbelina.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'packages/bootstrap-touchspin/bootstrap-touchspin.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'css/theme.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'css/alertify.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'css/alertify.min.css' %}" rel="stylesheet" type="text/css" media="all"  />
+<link href="{% static 'css/alertify.rtl.css' %}" rel="stylesheet" type="text/css" media="all"  />
+     <link href="{% static 'css/alertify.rtl.min.css' %}" rel="stylesheet" type="text/css" media="all"  />
+</head>
+<body>
+<div id="page-content" class="page-content">
+    <div class="banner">
+        <div class="jumbotron jumbotron-bg text-center rounded-0" style="background-image: url('{% static "img/logo/3862130.jpg" %}');">
+            <div class="container">
+                <h1 class="pt-5">
+                    Página de Registro
+                </h1>
+                <p class="lead">
+                    Únete a nuestra Comunidad
+                </p>
+                <div id='espera' style="display: none" class="spinner-border text-primary" role="status">
+  <span class="sr-only">Enviando....</span>
+</div>
+
+                <div class="card card-login mb-5">
+                    <div class="card-body">
+                        <div style="color:#800080" id="demo"></div>
+                        <form class="form-horizontal" action="" method="post"> {% csrf_token %}
+                            <div class="form-group row mt-3">
+                                <div class="col-md-12">
+                                    <input id='username' onkeyup="letras(this.value)" class="form-control" type="text" name="username" required="" placeholder="Usuario, es requerido">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <div class="col-md-12">
+                                    <input id='username1' onkeyup="letras(this.value)" class="form-control" type="text" name="first_name" required="" placeholder="Primer Apellido, es requerido">
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <div class="col-md-12">
+                                    <input onkeyup="letras(this.value)" class="form-control" type="text" name="last_name" required="" placeholder="Segundo apellido, es requerido">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input class="form-control" type="password" name="password1" required="" placeholder="Contraseña">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input class="form-control" type="password" name="password2" required="" placeholder="Repetir Contraseña">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input id='correo' class="form-control" type="email" onblur="envioCorreo()" name="email" required="" placeholder="Email">
+                                </div>
+                            </div>
+                           <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input id="codigo" onkeyup="numeros(this.value)" class="form-control" type="text" name="codigo" required="" placeholder="Código de verificación">
+                                </div>
+
+                            </div>
+
+                            
+                            <div class="form-group row text-center mt-4">
+                                <div class="col-md-12">
+                                    <button id="manda" type="submit" disabled class="btn btn-primary btn-block text-uppercase" >Registrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+function letras(texto){
+  var letras1=sonLetrasSolamente(texto)
+  if (letras1==false){
+  document.getElementById("demo").innerHTML = 'Son letras solamente' ;
+  document.getElementById("username").value = '' ;
+}
+else{document.getElementById("demo").innerHTML = '' ;}
+}
+function sonLetrasSolamente(texto){
+  var regex = /^[a-zA-Z]+$/;
+  return regex.test(texto);
+}
+ </script>
+<script>
+function numeros(texto){
+
+
+
+  var letras1=sonNumerosSolamente(texto)
+  if (letras1==false){
+  document.getElementById("demo").innerHTML = 'Son números solamente' ;
+ document.getElementById("codigo").value = '' ;
+}
+else{document.getElementById("demo").innerHTML = ''
+if (texto.length==5){
+
+    $('#manda').prop('disabled', false);
+    }else{ $('#manda').prop('disabled', true);}
+}
+}
+
+
+function sonNumerosSolamente(texto){
+  var regex = /^[0-9]+$/;
+
+  return regex.test(texto);
+}
+
+
+ </script>
+
+
+
+<script>
+    function envioCorreo(){
+    var correo=$('#correo').val()
+
+    alert('Se ha enviado un correo con un código. Presione Aceptar, y ubíquese en el cuadro de texto más abajo, mientras espera mensaje de correo.');
+    $('#espera').css('display','');
+
+$.ajax({
+        url: '{% url "enviacorreoValidar" %}',
+        data: {
+          'correo': correo,
+          'origen':'codigo'
+
+        },
+        dataType: 'json',
+        success: function (data) {
+            alert(data.mensaje)
+            $('#espera').css('display','none');
+
+	}
+
+}
+          )
+
+    }
+</script>
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-migrate.js' %}"></script>
+<script type="text/javascript" src="{% static 'packages/bootstrap/libraries/popper.js' %}"></script>
+<script type="text/javascript" src="{% static 'packages/bootstrap/bootstrap.js' %}"></script>
+<script type="text/javascript" src="{% static 'packages/o2system-ui/o2system-ui.js' %}"></script>
+<script type="text/javascript" src="{% static 'packages/owl-carousel/owl-carousel.js' %}"></script>
+<script type="text/javascript" src="{% static 'packages/cloudzoom/cloudzoom.js' %}"></script>
+<script type="text/javascript" src="{% static 'packages/thumbelina/thumbelina.js' %}"></script>
+<script type="text/javascript" src="{% static 'packages/bootstrap-touchspin/bootstrap-touchspin.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/theme.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/alertify.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/alertify.min.js' %}"></script>
+</html>

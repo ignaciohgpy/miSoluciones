@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+
+<div class="container" >
+    {% block contenido %}
+  <div  style="height: 20px" class="jumbotron">
+
+</div>
+        <div class="row">
+  <div id="Mostrar" class="landing-categories owl-carousel" data-ride="carousel">
+
+    {% for u in paquetes %}
+     <div class="item" >
+
+       <div class="card rounded-0 border-0 text-center" >
+        <img src="{{u.problemaID.problemaProblema.url }}" class="d-block w-100" alt="...">
+    </div>
+
+  </div>
+{%endfor%}
+</div>
+
+</div>
+</div>
+{% endblock %}

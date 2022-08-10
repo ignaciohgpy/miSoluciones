@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+ <head>
+{% load bootstrap4 %}
+{% bootstrap_css %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Mis Soluciones</title>
+        <link href="{% static 'descarga/ccs.css' %}" rel="stylesheet" type="text/css"  />
+        <link href="{% static 'descarga/fuente.css' %}" rel="stylesheet" type="text/css"  />
+        <link href="{% static 'fonts/sb-bistro/sb-bistro.css' %}" rel="stylesheet" type="text/css"  />
+        <link href="{% static 'fonts/font-awesome/font-awesome.css' %}" rel="stylesheet" type="text/css"  />
+
+        <link href="{% static 'packages/bootstrap/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'packages/o2system-ui/o2system-ui.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'packages/owl-carousel/owl-carousel.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'packages/cloudzoom/cloudzoom.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'packages/thumbelina/thumbelina.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'packages/bootstrap-touchspin/bootstrap-touchspin.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'css/theme.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'css/alertify.css' %}" rel="stylesheet" type="text/css" media="all"  />
+        <link href="{% static 'css/alertify.min.css' %}" rel="stylesheet" type="text/css" media="all"  />
+<link href="{% static 'css/alertify.rtl.css' %}" rel="stylesheet" type="text/css" media="all"  />
+     <link href="{% static 'css/alertify.rtl.min.css' %}" rel="stylesheet" type="text/css" media="all"  />
+    <link href="{% static 'ccstabla/css/editor/select2.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/editor/datetimepicker.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/editor/bootstrap-editable.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/editor/x-editor-style.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/data-table/bootstrap-table.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/data-table/bootstrap-editable.css' %}" rel="stylesheet" type="text/css"  />
+    <link href="{% static 'ccstabla/css/responsive.css' %}" rel="stylesheet" type="text/css"  />
+
+        
+
+ </head>
+
+  <body>
+    <div class="page-header">
+        <!--=============== Navbar ===============-->
+      <nav  class="navbar fixed-top navbar-expand-md " id="page-navigation">
+        <div class="container" >
+              <!-- Navbar Brand -->
+              <a href="{% url 'index' %}" class="navbar-brand">
+              <img src="{% static 'img/logo/missoluciones11.png' %}" alt="">
+              </a>
+               <!-- Toggle Button -->
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarcollapse">
+              <!-- Navbar Menu -->
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Comprar
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                       <a class="dropdown-item" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" href="">Categorias Ejercicios</a>
+                         <ul class="dropdown-menu multi-level" aria-labelledby="navbarDropdownMenulink">
+                             {% for u in perfiles %}
+                             <li class="dropdown-submenu" ><a href="{% url 'LPaquetes' u.nombrePerfil %}" class="dropdown-item">{{u.nombrePerfil}}</a></li>
+                             {% endfor %}
+                         </ul>
+
+
+                        <a class="dropdown-item" href="">Libros</a>
+                        <a class="dropdown-item" href="">Encuentros</a>
+
+                    </div>
+                  </li>
+
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Opciones
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'consultar' %}">Bibliotecas de soluciones</a>
+
+{% if request.user.id in listaProfe %}
+                        <a class="dropdown-item" href="{% url 'listatemas' %}">Gestión de Temas</a>
+                        <a class="dropdown-item" href="{% url 'formaPket' %}">Gestión de Paquetes</a>
+                        <a class="dropdown-item" href="{% url 'cargar' %}">Subir soluciones</a>
+                        {% endif %}
+                        {% if request.user.is_staff %}
+                        <a class="dropdown-item" href="{% url 'listalibros' %}">Gestión libros o Guías</a>
+                        {% endif %}
+                    </div>
+                  </li>
+
+
+
+                {% if au %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Mis Paquetes</a>
+
+                    <div id='mispaquetes' class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        {% for u in mispaquetes %}
+                        <a class="dropdown-item" href="{% url 'mipkt' u.paqueteMio %}">{{u.paqueteMio}}</a>
+                        {% endfor %}
+
+                        
+                    </div>
+
+                    {% endif %}
+                    
+
+                </li>
+                {% if not request.user.is_authenticated%}
+                <li class="nav-item">
+                    <a href="{% url 'registro' %}" class="nav-link">Registro</a>
+                </li>
+                {% endif%}
+                {% if not request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'Milogin' %}" class="nav-link">Login</a>
+                
+                </li>
+                {% endif%}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="avatar-header"><img src="{% static 'img/logo/avatar.jpg' %}"></div> {{ request.user.username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="transaction.html">Historial de Compra</a>
+                        <a class="dropdown-item" href="setting.html">Mi Perfil</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Salir</a>
+                    </div>
+                  </li>
+                <li class="nav-item dropdown">
+                    <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-shopping-basket"></i> <span id="cantidadCarro" class="badge badge-primary">0</span>
+                    </a>
+                    <div class="dropdown-menu shopping-cart">
+                        <ul>
+                            <li>
+                                <div class="drop-title">Compras</div>
+                            </li>
+                            <li>
+                                <div class="shopping-cart-list" id="carrito">
+                                    <div class="media">
+
+                                    </div>
+
+
+
+
+
+
+                                </div>
+                            </li>
+                            <li>
+                                <div id="totalcarrito" class="drop-title d-flex justify-content-between">
+                                    <span>Total:</span>
+                                    <span id="total" class="text-primary"><strong>0.00</strong></span>
+                                </div>
+                            </li>
+                            <li class="d-flex justify-content-between pl-3 pr-3 pt-3">
+
+                                <button onclick="Pagar()" class="btn btn-primary">Habilitar</button>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+      </div>
+     </nav>
+    </div>
+
+    <div id="page-content" class="page-content">
+
+        <div class="banner">
+          <div class="jumbotron jumbotron-video text-center bg-dark mb-0 rounded-0">
+              {% if var%}
+              <video width="100%" preload="auto" loop autoplay muted>
+                  <source src="{% static 'media/explore.mp4' %}" type='video/mp4' />
+                  <source src="{% static 'media/explore.webm' %}" type='video/webm' />
+              </video>
+              <div class="container">
+                  <h1 class="pt-5">
+                      LA PRIMERA REGLA DEL ÉXITO<br>
+                      ES UNA BUENA PREPARACIÓN.
+                  </h1>
+                  <p class="lead">
+                      24 hrs a tu servicio.
+                  </p>
+
+                  <div class="row">
+                      <div class="col-md-4">
+                          <div class="card border-0 text-center">
+                              <div class="card-icon">
+                                  <div class="card-icon-i">
+                                      <i class="fa fa-shopping-basket"></i>
+                                  </div>
+                              </div>
+                              <div class="card-body">
+                                  <h4 class="card-title">
+                                      Comprar Paquetes
+                                  </h4>
+                                  <p class="card-text">
+                                      De una manera simple podrá obtener paquetes de ejercicios resueltos por un colectivo de profesionales.
+                                  </p>
+
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="card border-0 text-center">
+                              <div class="card-icon">
+                                  <div class="card-icon-i">
+                                      <i class="fas fa-leaf"></i>
+                                  </div>
+                              </div>
+                              <div class="card-body">
+                                  <h4 class="card-title">
+                                      Libros 
+                                  </h4>
+                                  <p class="card-text">
+                                      Contamos con una Biblioteca extendida sobre las materias de Física, Matemática y Circuitos Eléctricos.
+                                  </p>
+
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                          <div class="card border-0 text-center">
+                              <div class="card-icon">
+                                  <div class="card-icon-i">
+                                      <i class="fa fa-truck"></i>
+                                  </div>
+                              </div>
+                              <div class="card-body">
+                                  <h4 class="card-title">
+                                      Comunidad Cientifíca
+                                  </h4>
+                                  <p class="card-text">
+                                      Puede formar parte del Claustro de profesores de este proyecto innovador, sus soluciones pueden ser vista por toda la Comunidad.
+                                  </p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {% endif %}
+          </div>
+
+      </div>
+
+        {% block contenido %}
+        {% endblock %}
+
+      <section id="why">
+          <h2 class="title">NUESTROS SERVICIOS</h2>
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="card border-0 text-center gray-bg">
+                          <div class="card-icon">
+                              <div class="card-icon-i text-success">
+                                  <i class="fas fa-leaf"></i>
+                              </div>
+                          </div>
+                          <div class="card-body">
+                              <h4 class="card-title">
+                                  EJERICIOS RESUELTOS
+                              </h4>
+                              <p class="card-text">
+                                  Ofrecemos nuestras soluciones de manera que nuestros clientes comprendan a fondo la temática abordada, utilizando videos, audios y materiales didácticos que multipliquen y desarrollen el conocimiento encontrado. 
+                              </p>
+
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="card border-0 text-center gray-bg">
+                          <div class="card-icon">
+                              <div class="card-icon-i text-success">
+                                  <i class="fa fa-question"></i>
+                              </div>
+                          </div>
+                          <div class="card-body">
+                              <h4 class="card-title">
+                                  CONSULTAS ONLINE
+                              </h4>
+                              <p class="card-text">
+                                  Se permite hacer la reserva de tiempo para cada tema en específico con cualquiera de los profesores del departamento, las reservas se realizan con 3 días de antelación.
+                              </p>
+
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="card border-0 text-center gray-bg">
+                          <div class="card-icon">
+                              <div class="card-icon-i text-success">
+                                  <i class="fas fa-smile"></i>
+                              </div>
+                          </div>
+                          <div class="card-body">
+                              <h4 class="card-title">
+                                  ENCUENTROS DE CONOCIMIENTOS
+                              </h4>
+                              <p class="card-text">
+                                  Los encuentros de conocimientos se realizan vía online los días previstos por los moderadores, se ofrecen premios metálicos a las soluciones ganadoras.
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-12 mt-5 text-center">
+                      <a href="shop.html" class="btn btn-primary btn-lg">COMPRAR AHORA</a>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section id="categories" class="pb-0 gray-bg">
+          <h2 class="title">Categorías</h2>
+          <div class="landing-categories owl-carousel">
+              <div class="item">
+                  <div class="card rounded-0 border-0 text-center">
+                      <img src="{% static 'img/libros-auto.jpg' %}">
+                                           
+                      <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                          <!-- <h4 class="card-title">Vegetables</h4> -->
+                          <a href="shop.html" class="btn btn-primary btn-lg">LIBROS</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="item">
+                  <div class="card rounded-0 border-0 text-center">
+                      <img src="{% static 'img/fisica-auto.jpg' %}">
+                      <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                          <!-- <h4 class="card-title">Fruits</h4> -->
+                          <a href="{% url 'LPaquetes' perfiles.0.nombrePerfil %}" class="btn btn-primary btn-lg">PROBLEMAS FÍSICA</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="item">
+                  <div class="card rounded-0 border-0 text-center">
+                      <img src="{% static 'img/matematica-auto.jpg' %}">
+                      <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                          <!-- <h4 class="card-title">Meats</h4> -->
+                          <a href="{% url 'LPaquetes' perfiles.2.nombrePerfil %}" class="btn btn-primary btn-lg">PROBLEMAS MATEMÁTICA</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="item">
+                  <div class="card rounded-0 border-0 text-center">
+                      <img src="{% static 'img/circuitos-auto.jpg' %}">
+                      <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                          <!-- <h4 class="card-title">Fishes</h4> -->
+                          <a href="{% url 'LPaquetes' perfiles.1.nombrePerfil %}" class="btn btn-primary btn-lg">CIRCUITOS ELÉCTICOS</a>
+                      </div>
+                  </div>
+              </div>
+
+
+          </div>
+      </section>
+  </div>
+  <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Nuestro trabajo</h5>
+                <p>Mis Soluciones es un proyecto organizado de estructuras que está fuertemente arraigado de valores, sentimientos y actitudes con una finalidad conocida por todos: la gestión del proceso enseñanza-aprendizaje</p>
+            </div>
+            <div class="col-md-3">
+                <h5>Links</h5>
+                <ul>
+                    <li>
+                        <a href="{% url 'team' %}">Equipo de Trabajo</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'contactanos' %}">Contactanos</a>
+                        </li>
+                    <li>
+                        <a href="{% url 'promociones' %}">Promociones</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Como es nuestro trabajo</a>
+                    </li>
+                    <li>
+                        <a href="{%url 'terminos'%}">Términos</a>
+                    </li>
+                    <li>
+                        <a href="privacy.html">Política de Privacidad</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                 <h5>Contacto</h5>
+                 <ul>
+                     <li>
+                        <a href="tel:+620892738334"><i class="fa fa-phone"></i>+53 51593881</a>
+                    </li>
+                    <li>
+                        <a href="mailto:hello@domain.com"><i class="fa fa-envelope"></i>missoluciones@gmail.com</a>
+                     </li>
+                 </ul>
+
+                 <h5>Síguenos</h5>
+                 <ul class="social">
+                     <li>
+                        <a href="javascript:void(0)" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                     </li>
+                     <li>
+                        <a href="javascript:void(0)" target="_blank"><i class="fab fa-instagram"></i></a>
+                     </li>
+                     <li>
+                        <a href="javascript:void(0)" target="_blank"><i class="fab fa-youtube"></i></a>
+                     </li>
+                 </ul>
+            </div>
+            <div class="col-md-3">
+                 <h5>Get Our App</h5>
+                 <ul class="mb-0">
+                     <li class="download-app">
+                         <a href="#"><img src="{% static 'img/playstore.png' %}"></a>
+                      </li>
+                     <li style="height: 200px">
+                         <div class="mockup">
+                             <img src="{% static 'img/mockup.png' %}">
+                         </div>
+                     </li>
+                 </ul>
+            </div>
+        </div>
+    </div>
+    <p class="copyright">&copy; 2022 Soluciones | Estudio Online. Derechos Reservados.</p>
+</footer>
+<script>
+    function Pagar() {
+    var todo=document.getElementsByClassName("media");
+    var ids=[]
+    for (i = 0; i < todo.length; i++){
+    ids[i]=todo[i].id
+    if (todo[i].id!==''){
+    const ref='/verMiPKT/'+todo[i].id
+
+
+    $("#mispaquetes").append('<a class="dropdown-item" href='+ref+'>'+todo[i].id+'</a>')
+    }
+    }
+    $.ajax({
+        url: '{% url "compraPKT" %}',
+        data: {
+
+          'lista': ids,
+
+
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data) {
+
+              alertify.success(data.sms);
+
+
+
+}
+          }
+        })
+    }
+</script>
+
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-migrate.js' %}"></script>
+    <script type="text/javascript" src="{% static 'packages/bootstrap/libraries/popper.js' %}"></script>
+    <script type="text/javascript" src="{% static 'packages/bootstrap/bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'packages/o2system-ui/o2system-ui.js' %}"></script>
+    <script type="text/javascript" src="{% static 'packages/owl-carousel/owl-carousel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'packages/cloudzoom/cloudzoom.js' %}"></script>
+    <script type="text/javascript" src="{% static 'packages/thumbelina/thumbelina.js' %}"></script>
+    <script type="text/javascript" src="{% static 'packages/bootstrap-touchspin/bootstrap-touchspin.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/theme.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/alertify.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/alertify.min.js' %}"></script>
+
+
+  <script src="{% static 'ccstabla/js/metisMenu/metisMenu.min.js' %}"></script>
+ <script src="{% static 'ccstabla/js/metisMenu/metisMenu-active.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/bootstrap-table.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/tableExport.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/data-table-active.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/bootstrap-table-editable.js' %}"></script>
+ <script src="{% static 'ccstabla/js/bootstrap.min.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/bootstrap-editable.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/bootstrap-table-resizable.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/colResizable-1.5.source.js' %}"></script>
+ <script src="{% static 'ccstabla/js/data-table/bootstrap-table-export.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/jquery.mockjax.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/mock-active.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/select2.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/moment.min.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/bootstrap-datetimepicker.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/bootstrap-editable.js' %}"></script>
+ <script src="{% static 'ccstabla/js/editable/xediable-active.js' %}"></script>
+
+  </body>
+  </html>
+

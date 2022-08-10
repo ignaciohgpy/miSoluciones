@@ -1,0 +1,58 @@
+{% extends 'index.html' %}
+{% block contenido %}
+<div  style="height: 20px" class="jumbotron">
+<div style="margin-left:auto;margin-right: auto;">
+  <br>
+  <p>Paquete  de {{pkt}}</p>
+ </div>
+</div>
+<div class="container col auto"  >
+    <div class="row row justify-content-center align-items-center minh-100">
+  <div class="col-4">
+  <div class="card-header card text-black " >Soluciones del paquete {{pkt}}</div>
+  <div class="card-body" >
+
+  <label for="sel1" class="text-black">Seleccione un problema e irá a la solución:</label>
+      <hr>
+<div style="overflow:scroll;height:150px;width:280px;border:solid" class="text-black">
+    <ul>
+    {%for j in problemas%}
+    <li><a class="text-black" href="{% url 'versolucion'  j.problemaID.problemaLibro j.problemaID.problemaNumero %}">{{j.problemaID.problemaNumero}}/{{j.problemaID.problemaLibro}}</a></li>
+
+      {% endfor %}
+        </ul>
+</div>
+      <br>
+      <hr>
+      <label>Haga click sobre la figura e ira a la solución:</label>
+
+</div>
+  <div class="card-footer text-white ">Mis Soluciones</div>
+</div>
+
+   <div class="col-8">
+  <div class="landing-categories owl-carousel" >
+
+    {% for u in problemas %}
+
+
+        <div class="item">
+            <div class="card rounded-0 border-0 text-center">
+        <a href="{% url 'versolucion' u.problemaID.problemaLibro  u.problemaID.problemaNumero %}"><img src="{{u.problemaID.problemaProblema.url }}" width="250" height="250" ></a>
+        </div>
+  </div>
+
+
+   {%endfor%}
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+{%endblock%}
+
+
+

@@ -1,0 +1,10 @@
+   .header {
+  background: url('{% static 'images/img0444.jpg' %}') no-repeat center;
+  background-size: cover;
+  min-height: 20vh;
+}
+ #menu .current_page_item a {
+	height: 26px;
+	background: url('{% static 'images/img02.jpg' %}') repeat-x left top;
+	color: #343738;
+}

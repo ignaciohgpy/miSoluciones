@@ -1,0 +1,76 @@
+{% extends "index.html" %}
+
+{% block contenido %}
+<div  style="height: 20px" class="jumbotron">
+<div style="margin-left:auto;margin-right: auto;">
+  <h5>Hola ¿en qué te podemos ayudar?</h5>
+  <p>Escribe al grupo de Desarrollo de Nuestra Empresa</p>
+ </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="well well-sm">
+                <form method = "POST"  action="/contac/" multipart/form-data"> {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">
+                                Nombre</label>
+                            <input type="text" name="nombre" class="form-control" id="name" placeholder="Escriba su nombre de contacto" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">
+                                Email</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
+                                </span>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Escriba su correo" required="required" /></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">
+                                Opciones</label>
+                            <select id="subject" name="subject" class="form-control" required="required">
+                                <option value="na" selected="">Seleccione su problemática:</option>
+                                <option value="Sobre el Servicio">Sobre el Servicio</option>
+                                <option value="Sugerencias">Sugerencias</option>
+                                <option value="Funcionamiento Inadecuado">Funcionamiento Inadecuado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">
+                                Comentarios</label>
+                            <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
+                                placeholder="Tu comentario"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                            Enviar</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+            <legend><span class="glyphicon glyphicon-globe"></span>Oficina Central</legend>
+            <address>
+                <strong>LA Habana, Cuba.</strong><br>
+                75 114 Ave, Instituto Superior Politécnico(IPSJAE)<br>
+                Marianao, No 94107<br>
+                <address title=" Número Telefónico">
+                    P:</abbr>
+                (+53)7 267-7890
+            </address>
+            <address>
+                <strong>Ing. Ignacio Hernández</strong><br>
+                <a href="mailto:#">missoluciones22@yandex.com</a>
+            </address>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
